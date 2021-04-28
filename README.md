@@ -1,1 +1,1 @@
-# CB_review
+This little repo contains scripts used in the manuscript "Mushrooming Diversity: How New Technology, Big Data, and Changing Attitudes are Shaping the Future of Fungal Biodiversity Research and Conservation Mycology". 
