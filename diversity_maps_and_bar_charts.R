@@ -5,7 +5,7 @@
 #18,670,313 occurrences included in download before subsetting any information
 
 #setwd
-setwd("~")
+setwd("~/Desktop/CB_review")
 library("rgbif")
 library(data.table)
 library(classInt)
@@ -149,27 +149,53 @@ culture_collection_phylum<- data.frame(table(culture_collection$phylum))
 par(mfrow=c(3,1))
 #dev.off()
 #par(mar=c(5,6,4,1)+.3)
-#make bar graphs 
+
+
+zygomycetes<- preserved_specimen_phylum[8,2] + preserved_specimen_phylum[6,2]
+preserved_specimen_phylum<- preserved_specimen_phylum[-c(8,6),] 
+new_row<- as.data.frame(cbind("Zygomycetes", as.integer(zygomycetes)))
+names(new_row)<- c("Var1", "Freq")
+preserved_specimen_phylum<- rbind(preserved_specimen_phylum, new_row)
+preserved_specimen_phylum$Var1<- as.factor(preserved_specimen_phylum$Var1)
+preserved_specimen_phylum$Freq<- as.integer(preserved_specimen_phylum$Freq)
 
 xx<- barplot(height = preserved_specimen_phylum$Freq,
         names = preserved_specimen_phylum$Var1, 
-        col="black", 
+        col="#144556", 
+        border=NA,
         las = 2)
 text(x = xx, y = preserved_specimen_phylum$Freq, label = preserved_specimen_phylum$Freq, pos = 3, cex = 0.8, col = "black", xpd=NA)
 
 
+zygomycetes<- human_observation_phylum[8,2] + human_observation_phylum[6,2]
+human_observation_phylum<- human_observation_phylum[-c(8,6),] 
+new_row<- as.data.frame(cbind("Zygomycetes", as.integer(zygomycetes)))
+names(new_row)<- c("Var1", "Freq")
+human_observation_phylum<- rbind(human_observation_phylum, new_row)
+human_observation_phylum$Var1<- as.factor(human_observation_phylum$Var1)
+human_observation_phylum$Freq<- as.integer(human_observation_phylum$Freq)
+
 yy<- barplot(height = human_observation_phylum$Freq,
              names = human_observation_phylum$Var1, 
-             col="black", 
+             col="#455448", 
+             border=NA,
              las = 2)
 text(x = yy, y = human_observation_phylum$Freq, label = human_observation_phylum$Freq, pos = 3, cex = 0.8, col = "black", xpd=NA)
 
-
+zygomycetes<- culture_collection_phylum[8,2] + culture_collection_phylum[6,2]
+culture_collection_phylum<- culture_collection_phylum[-c(8,6),] 
+new_row<- as.data.frame(cbind("Zygomycetes", as.integer(zygomycetes)))
+names(new_row)<- c("Var1", "Freq")
+culture_collection_phylum<- rbind(culture_collection_phylum, new_row)
+culture_collection_phylum$Var1<- as.factor(culture_collection_phylum$Var1)
+culture_collection_phylum$Freq<- as.integer(culture_collection_phylum$Freq)
 zz<- barplot(height = culture_collection_phylum$Freq,
              names = culture_collection_phylum$Var1, 
-             col="black", 
+             col="#B6774E", 
+             border=NA,
              las = 2)
 text(x = zz, y = culture_collection_phylum$Freq, label = culture_collection_phylum$Freq, pos = 3, cex = 0.8, col = "black", xpd=NA)
+
 
 ggsave("CB_review_diversity.pdf", width=6, height=4, units="in")
 
